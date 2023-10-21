@@ -31,11 +31,9 @@ public class Main {
             int sum = resultSet.getInt("sum");
             System.out.println("Id:" + id + " " + "Date:" + date + " " + "Recipient:" + recipient + " " + "Sum:" + sum);
 
-            resultSet.close();
-            statement.close();
         }
-
-
+        resultSet.close();
+        statement.close();
 
     }
 }
