@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
 
-    <changeSet id="2" author="tomko">
+    <changeSet id="1" author="tomko">
         <sql>
             CREATE TABLE `expenses` (
                                         `id` int NOT NULL,
