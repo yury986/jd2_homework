@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="tomko">
+        <sql>
+            CREATE TABLE `recipients` (
+            `recipient_id` int NOT NULL,
+            `recipient_name` varchar (80) NOT NULL,
+            PRIMARY KEY (`recipient_id`))
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="tomko">
+        <sql>
+            CREATE TABLE `expenses` (
+            `payment_id` int NOT NULL,
+            `date` varchar(80) NOT NULL,
+            `recipient_id` int NOT NULL,
+            `sum` int  NOT NULL,
+            PRIMARY KEY (payment_id),
+            FOREIGN KEY (recipient_id) REFERENCES recipients(recipient_id))
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="tomko">
+        <sql>
+            INSERT INTO recipients VALUES (1, 'Интернет провайдер "Соло"');
+            INSERT INTO recipients VALUES (2, 'Гипермаркет "Корона"');
+            INSERT INTO recipients VALUES (3, 'МТС');
+            INSERT INTO recipients VALUES (4, 'Гипермаркет "Грин"');
+            INSERT INTO recipients VALUES (5, '"ЖЭК"');
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="tomko">
+        <sql>
+            INSERT INTO expenses VALUES (1, '10.05.2011', 1, 1000);
+            INSERT INTO expenses VALUES (2, '10.05.2011', 2, 94200);
+            INSERT INTO expenses VALUES (3, '11.05.2011', 3, 10000);
+            INSERT INTO expenses VALUES (4, '11.05.2011', 2, 12950);
+            INSERT INTO expenses VALUES (5, '12.05.2011', 2, 11500);
+            INSERT INTO expenses VALUES (6, '13.05.2011', 4, 10000);
+            INSERT INTO expenses VALUES (7, '15.05.2011', 4, 12750);
+            INSERT INTO expenses VALUES (8, '19.05.2011', 2, 5500);
+            INSERT INTO expenses VALUES (9, '25.05.2011', 4, 13600);
+            INSERT INTO expenses VALUES (10,'25.05.2011',5, 93000);
+            INSERT INTO expenses VALUES (11,'30.05.2011',2, 12500);
+            INSERT INTO expenses VALUES (12,'01.06.2011',4, 13500);
+            INSERT INTO expenses VALUES (13,'05.06.2011',1, 20000);
+            INSERT INTO expenses VALUES (14,'10.06.2011',3, 10000);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
