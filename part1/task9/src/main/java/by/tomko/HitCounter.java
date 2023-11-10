@@ -1,8 +1,7 @@
 package by.tomko;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,8 +35,14 @@ public class HitCounter extends HttpServlet {
                 "<h1 align = \"center\">" + title + "</h1>\n" +
                 "<h2 align = \"center\">" + hitCount + "</h2>\n" +
                 "</body> </html>");
+
         String str = Integer.toString(hitCount);
-        FileWriter writer = new FileWriter("D:/hit.txt");
+        String userHomeDir = System.getProperty("user.home");
+        String counterFileDir = userHomeDir + File.separator + "task9";
+        new File(counterFileDir).mkdirs();
+        String counterFilePath = counterFileDir + File.separator + "hit.txt";
+
+        FileWriter writer = new FileWriter(counterFilePath);
         writer.write(str);
         writer.close();
 
