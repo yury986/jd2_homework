@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -32,5 +34,15 @@ public class ServletImage extends HttpServlet {
         graphics.drawString(String.valueOf(hitCount),100,100);
         ServletOutputStream out = resp.getOutputStream();
         ImageIO.write(image, "jpeg", out);
+
+        String str = Integer.toString(hitCount);
+        String userHomeDir = System.getProperty("user.home");
+        String counterFileDir = userHomeDir + File.separator + "task12";
+        new File(counterFileDir).mkdirs();
+        String counterFilePath = counterFileDir + File.separator + "hit.txt";
+
+        FileWriter writer = new FileWriter(counterFilePath);
+        writer.write(str);
+        writer.close();
     }
 }
