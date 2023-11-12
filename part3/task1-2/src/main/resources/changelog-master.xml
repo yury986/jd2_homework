@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+
+    <changeSet id="1" author="tomko">
+        <sql>
+            CREATE TABLE IF NOT EXISTS CAR (
+                CAR_ID varchar(150) NOT NULL,
+                MODEL varchar(150) NOT NULL,
+                COLOR varchar(150) NOT NULL,
+                PRICE varchar(150) NOT NULL,
+                PRIMARY KEY (CAR_ID));
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
