@@ -67,6 +67,11 @@ public class CarDaoImpl implements CarDao {
 
             car = session.load(Car.class, id); //Some work
 
+            car.getId();
+            car.getModel();
+            car.getColor();
+            car.getPrice();
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();

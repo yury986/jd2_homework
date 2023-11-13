@@ -22,10 +22,11 @@ public class CarRunner {
         CarDao carDao = new CarDaoImpl(); //task2
 
         Car car = carDao.getCarById(PeugeotId);   //task2
-        System.out.println(car.getId());
+        System.out.println(car.getModel());
 
         Car car2 = carDao.loadCarById(PeugeotId);  //task2
-        System.out.println(car2.getId());
+        System.out.println(car2.getModel());
+        System.out.println("+++++++++++++");
 
 
 
