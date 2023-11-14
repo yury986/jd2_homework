@@ -1,28 +1,31 @@
 package by.tomko.data.Dao;
 
+import by.tomko.CarDataSource;
 import by.tomko.CarSessionFactory;
 import by.tomko.data.pojo.Car;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.Connection;
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 public class CarDaoImpl implements CarDao {
 
     @Override
-    public void refreshCar(String id, String model) {
+    public Car refreshCar(String id, Car car) {
         Session session = null;
         Transaction transaction = null;
-        Car car;
+
         try {
             session = CarSessionFactory.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
 
-            car = session.get(Car.class, id); //Some work
-
-            car.setModel(model);
             session.clear();
-            session.refresh(car);
+
+            session.refresh(car); //Some work
 
 
         } catch (Exception e) {
@@ -31,6 +34,7 @@ public class CarDaoImpl implements CarDao {
         } finally {
             if (session != null) session.close();
         }
+        return car;
     }
 
 
@@ -66,7 +70,6 @@ public class CarDaoImpl implements CarDao {
             transaction = session.beginTransaction();
 
             car = session.load(Car.class, id); //Some work
-
             car.getId();
             car.getModel();
             car.getColor();

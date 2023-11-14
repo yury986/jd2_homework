@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CarDao {
 
-    public void refreshCar(String id, String name);
+    Car refreshCar(String id, Car car);
 
     Car getCarById(String id);
 
