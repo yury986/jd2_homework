@@ -1,16 +1,16 @@
 package by.tomko.data.Dao;
 
-import by.tomko.CarDataSource;
+
 import by.tomko.CarSessionFactory;
 import by.tomko.data.pojo.Car;
-import org.hibernate.HibernateException;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.sql.Connection;
+
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
+
 
 public class CarDaoImpl implements CarDao {
 

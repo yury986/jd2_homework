@@ -32,7 +32,7 @@ public class CarRunner {
         System.out.println("++++++");
 
           String RenoId = UUID.randomUUID().toString();  //task3
-          Car newCarReno = new Car(RenoId, "Reno", "Grey", "5000");
+          Car newCarReno = new Car(RenoId, "Reno", "Grey", "-5000");
 
           createTriggerNds(newCarReno);
           Car car1  = carDao.refreshCar(RenoId, newCarReno);
@@ -47,6 +47,10 @@ public class CarRunner {
    private static void createTriggerNds(Car car) throws SQLException, ClassNotFoundException {   // Прибавляет к стоимости ндс.
         String nds;
         try{
+            if (parseInt(car.getPrice()) < 0 || (parseInt(car.getPrice())==0)){
+                System.out.println("Price must be more than zero.");
+                System.exit(1);
+            }
             nds = Integer.toString(parseInt(car.getPrice()) / 100 * 20 + parseInt(car.getPrice()));
 
         Connection conn = CarDataSource.getConnection();
