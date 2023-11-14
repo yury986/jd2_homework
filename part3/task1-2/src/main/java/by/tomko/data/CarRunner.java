@@ -36,8 +36,6 @@ public class CarRunner {
           Car newCarReno = new Car(RenoId, "Reno", "Grey", "5000");
 
           createTriggerNds(newCarReno);
-          String carReno = new CarDaoImpl().saveNewCar(newCarReno);
-
           Car car1  = carDao.refreshCar(RenoId, newCarReno);
           System.out.println(car1.getPrice());
 
@@ -53,10 +51,13 @@ public class CarRunner {
         nds = Integer.toString(parseInt(car.getPrice()) / 100 * 20 + parseInt(car.getPrice()));
         Connection conn = CarDataSource.getConnection();
         conn.createStatement().executeUpdate(
-                " CREATE DEFINER=`root`@`localhost` TRIGGER `car_BEFORE_INSERT` BEFORE INSERT ON `car` FOR EACH ROW BEGIN\n" +
+                " CREATE DEFINER  =`root`@`localhost`  TRIGGER `car_BEFORE_INSERT` BEFORE INSERT ON `car` FOR EACH ROW BEGIN\n" +
                         "set new.price = '"+nds+"';\n" +
                         "END");
-    }
+       String car3 = new CarDaoImpl().saveNewCar(car);
+       conn.createStatement().executeUpdate(
+               "DROP TRIGGER `task1-2`.CAR_BEFORE_INSERT;");
+            }
 }
 
 
