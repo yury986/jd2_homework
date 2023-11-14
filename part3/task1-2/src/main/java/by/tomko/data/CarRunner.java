@@ -18,7 +18,6 @@ public class CarRunner {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 
-
         String PeugeotId = UUID.randomUUID().toString(); // task2
         Car newCarPeugeot = new Car(PeugeotId, "Peugeot", "Blue", "15000");
         String carPeugeot = new CarDaoImpl().saveNewCar(newCarPeugeot);
@@ -43,12 +42,13 @@ public class CarRunner {
           Boolean result = carDao.deleteCarById(RenoId);
           System.out.println(result);
 
-
     }
 
-   public static void createTriggerNds(Car car) throws SQLException, ClassNotFoundException {   // Прибавляет к стоимости ндс.
+   private static void createTriggerNds(Car car) throws SQLException, ClassNotFoundException {   // Прибавляет к стоимости ндс.
         String nds;
-        nds = Integer.toString(parseInt(car.getPrice()) / 100 * 20 + parseInt(car.getPrice()));
+        try{
+            nds = Integer.toString(parseInt(car.getPrice()) / 100 * 20 + parseInt(car.getPrice()));
+
         Connection conn = CarDataSource.getConnection();
         conn.createStatement().executeUpdate(
                 " CREATE DEFINER  =`root`@`localhost`  TRIGGER `car_BEFORE_INSERT` BEFORE INSERT ON `car` FOR EACH ROW BEGIN\n" +
@@ -57,6 +57,11 @@ public class CarRunner {
        String car3 = new CarDaoImpl().saveNewCar(car);
        conn.createStatement().executeUpdate(
                "DROP TRIGGER `task1-2`.CAR_BEFORE_INSERT;");
+
+   } catch (NumberFormatException e) {
+        System.out.println("Invalid argument: argument price must be Integer");
+        System.exit(1);
+    }
             }
 }
 

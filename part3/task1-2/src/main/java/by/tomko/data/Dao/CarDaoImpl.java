@@ -16,6 +16,13 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Car refreshCar(String id, Car car) {
+        if (id == null){
+            throw new IllegalArgumentException("Arg id not be null");
+        }
+
+        if (car == null){
+            throw new IllegalArgumentException("Arg car not be null");
+        }
         Session session = null;
         Transaction transaction = null;
 
@@ -40,6 +47,9 @@ public class CarDaoImpl implements CarDao {
 
         @Override
     public Car getCarById(String id) {
+            if (id == null){
+                throw new IllegalArgumentException("Arg id not be null");
+            }
         Session session = null;
         Transaction transaction = null;
         Car car;
@@ -62,6 +72,9 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Car loadCarById(String id){
+        if (id == null){
+            throw new IllegalArgumentException("Arg id not be null");
+        }
         Session session = null;
         Transaction transaction = null;
         Car car;
@@ -87,7 +100,9 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public  String saveNewCar(Car car) {
-
+        if (car == null){
+            throw new IllegalArgumentException("Arg car not be null");
+        }
         Session session = null;
         Transaction transaction = null;
         String savedId;
@@ -108,6 +123,9 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public boolean deleteCarById(String id) {
+        if (id == null){
+            throw new IllegalArgumentException("Arg id not be null");
+        }
         Session session = null;
         Transaction transaction = null;
         Car car;
@@ -131,6 +149,9 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Car findCarById(String id) {
+        if (id == null){
+            throw new IllegalArgumentException("Arg id not be null");
+        }
         Session session = null;
         Transaction transaction = null;
         Car car;
