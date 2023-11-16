@@ -32,7 +32,7 @@ public class CarRunner {
         System.out.println("++++++");
 
           String RenoId = UUID.randomUUID().toString();  //task3
-          Car newCarReno = new Car(RenoId, "Reno", "Grey", "-5000");
+          Car newCarReno = new Car(RenoId, "Reno", "Grey", "5000");
 
           createTriggerNds(newCarReno);
           Car car1  = carDao.refreshCar(RenoId, newCarReno);
