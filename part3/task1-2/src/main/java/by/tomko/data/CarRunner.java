@@ -18,28 +18,27 @@ public class CarRunner {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 
-        String PeugeotId = UUID.randomUUID().toString(); // task2
-        Car newCarPeugeot = new Car(PeugeotId, "Peugeot", "Blue", "15000");
+
+        Car newCarPeugeot = new Car(null, "Peugeot", "Blue", "15000");
         String carPeugeot = new CarDaoImpl().saveNewCar(newCarPeugeot);
 
         CarDao carDao = new CarDaoImpl(); //task2
 
-        Car car = carDao.getCarById(PeugeotId);
+        Car car = carDao.getCarById(carPeugeot);
         System.out.println(car.getModel());
 
-        Car car2 = carDao.loadCarById(PeugeotId);
+        Car car2 = carDao.loadCarById(carPeugeot);
         System.out.println(car2.getModel());
         System.out.println("++++++");
 
-          String RenoId = UUID.randomUUID().toString();  //task3
-          Car newCarReno = new Car(RenoId, "Reno", "Grey", "5000");
 
+          Car newCarReno = new Car(null, "Reno", "Grey", "5000");
           createTriggerNds(newCarReno);
-          Car car1  = carDao.refreshCar(RenoId, newCarReno);
+          Car car1  = carDao.refreshCar(newCarReno.getId(), newCarReno);
           System.out.println(car1.getPrice());
 
 
-          Boolean result = carDao.deleteCarById(RenoId);
+          Boolean result = carDao.deleteCarById(newCarReno.getId());
           System.out.println(result);
 
     }

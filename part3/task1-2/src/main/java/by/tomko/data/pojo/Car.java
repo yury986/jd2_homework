@@ -11,6 +11,8 @@ import java.util.Objects;
 public class Car {
 
     @Id
+    @GeneratedValue(generator = "car-uuid")
+    @GenericGenerator(name = "car-uuid", strategy = "uuid")
     @Column(name = "CAR_ID")
     String id;
 
