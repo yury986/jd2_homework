@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CarDaoImpl implements CarDao {
 
-    private final SessionFactory sessionFactory;
+    private  SessionFactory sessionFactory;
 
     public CarDaoImpl(SessionFactory sessionFactory) {
         if (sessionFactory == null) {
@@ -17,8 +17,6 @@ public class CarDaoImpl implements CarDao {
         }
         this.sessionFactory = sessionFactory;
     }
-
-
 
     @Override
     public Car getCarById(String id) {

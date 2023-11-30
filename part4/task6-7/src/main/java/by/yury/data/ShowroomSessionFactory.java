@@ -1,8 +1,9 @@
 package by.yury.data;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class SessionFactory {
+public class ShowroomSessionFactory {
 
     private static SessionFactory sessionFactory;
 
