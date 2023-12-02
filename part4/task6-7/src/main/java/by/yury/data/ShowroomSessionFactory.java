@@ -10,9 +10,8 @@ public class ShowroomSessionFactory {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-                //Configuration conf = new Configuration();
-                //conf.setPhysicalNamingStrategy(new MyPhysicalNamingStrategy());
-                sessionFactory = (SessionFactory) new Configuration()
+
+                sessionFactory =  new Configuration()
                         .configure("hibernate.cfg.xml")
                         .buildSessionFactory();
             } catch (Exception e) {
