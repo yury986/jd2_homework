@@ -2,7 +2,6 @@ package by.yury.data.dao;
 
 import by.yury.data.InheritanceTestDataSource;
 import by.yury.data.InheritanceTestSessionFactory;
-import by.yury.data.pojo.joined.Person;
 import by.yury.data.pojo.singleTable.Animal;
 import org.junit.Test;
 

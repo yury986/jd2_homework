@@ -1,6 +1,6 @@
 package by.yury.data.dao;
 
-import by.yury.data.InheritanceSessionFactory;
+
 import by.yury.data.pojo.joined.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,12 +22,17 @@ public class ObjectDaoImpl implements ObjectDao {
 
         Session session = null;
         Transaction transaction = null;
+        String id;
 
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
+            session.refresh(object);
+            id = (String) session.getIdentifier(object);
+            object = session.merge(id,object);   //Some work
 
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             throw new RuntimeException(e);
@@ -61,4 +66,6 @@ public class ObjectDaoImpl implements ObjectDao {
         return savedId;
     }
 
+    private class object {
+    }
 }

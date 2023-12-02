@@ -43,6 +43,18 @@ public class Main {
         objectDaoImpl.saveNewObject(plane);
 
 
+        objectDaoImpl.getObjectById(person);
+        objectDaoImpl.getObjectById(employee);
+        objectDaoImpl.getObjectById(student);
+
+        objectDaoImpl.getObjectById(animal);
+        objectDaoImpl.getObjectById(lion);
+        objectDaoImpl.getObjectById(eagle);
+
+        objectDaoImpl.getObjectById(vehicle);
+        objectDaoImpl.getObjectById(ship);
+        objectDaoImpl.getObjectById(plane);
+
 
     }
 }
