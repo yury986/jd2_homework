@@ -1,15 +1,12 @@
 package by.yury.data;
 
-import by.yury.data.pojo.Person;
+import by.yury.data.pojo.*;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -19,33 +16,35 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "by.yury")
-@PropertySource(value = {"classpath:application.properties"})
+@ComponentScan(basePackages = "by.yury.data")
+@PropertySource(value = {
+        "classpath:liquibase.properties",
+        "classpath:hibernate.properties"
+})
 @EnableTransactionManagement
 public class DataConfiguration {
 
+
     @Bean
     public Properties hibernateProperties(
-            @Value("${spring.jpa.show-sql}") String showSql,
+            @Value("${hibernate.show_sql}") String showSql,
             @Value("true") String debug,
-            @Value("${spring.jpa.properties.hibernate.dialect}") String dialect,
-            @Value("${spring.jpa.hibernate.ddl-auto}") String hbm2ddl
+            @Value("${hibernate.dialect}") String dialect
     ) {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.show_sql", showSql);
         hibernateProperties.put("debug", debug);
         hibernateProperties.put("hibernate.dialect", dialect);
-        hibernateProperties.put("hibernate.hbm2ddl.auto", hbm2ddl);
         return hibernateProperties;
     }
 
     @Bean
     public DataSource dataSource(
-            @Value("${spring.datasource.url}") String url,
-            @Value("${spring.datasource.driver-class-name}") String driverClassName,
-            @Value("${spring.datasource.username}") String userName,
-            @Value("${spring.datasource.password}") String password,
-            @Value("25") int maxTotal) {
+            @Value("${url}") String url,
+            @Value("${driver}") String driverClassName,
+            @Value("root") String userName,
+            @Value("${password}") String password,
+            @Value("50") int maxTotal) {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(url);
         config.setDriverClassName(driverClassName);
@@ -68,6 +67,8 @@ public class DataConfiguration {
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setAnnotatedClasses(
                 Person.class
+
+
         );
         return sessionFactory;
     }
@@ -77,3 +78,4 @@ public class DataConfiguration {
         return new HibernateTransactionManager(sessionFactory);
     }
 }
+
